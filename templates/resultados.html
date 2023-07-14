@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Resultados</title>
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.25/css/jquery.dataTables.min.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('#tabla-registros').DataTable();
+        });
+    </script>
+</head>
+<body>
+    <h1>Resultados</h1>
+    <table id="tabla-registros" class="display">
+        <thead>
+            <tr>
+                <th>fec_alta</th>
+                <th>user_name</th>
+                <th>codigo_zip</th>
+                <th>credit_card_num</th>
+                <th>credit_card_ccv</th>
+                <th>cuenta_numero</th>
+                <th>direccion</th>
+                <th>geo_latitud</th>
+                <th>geo_longitud</th>
+                <th>color_favorito</th>
+                <th>foto_dni</th>
+                <th>ip</th>
+                <th>auto</th>
+                <th>auto_modelo</th>
+                <th>auto_tipo</th>
+                <th>auto_color</th>
+                <th>cantidad_compras_realizadas</th>
+                <th>avatar</th>
+                <th>fec_birthday</th>
+                <th>id</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for registro in registros %}
+            <tr>
+                <td>{{ registro.fec_alta }}</td>
+                <td>{{ registro.user_name }}</td>
+                <td>{{ registro.codigo_zip }}</td>
+                <td>{{ registro.credit_card_num }}</td>
+                <td>{{ registro.credit_card_ccv }}</td>
+                <td>{{ registro.cuenta_numero }}</td>
+                <td>{{ registro.direccion }}</td>
+                <td>{{ registro.geo_latitud }}</td>
+                <td>{{ registro.geo_longitud }}</td>
+                <td>{{ registro.color_favorito }}</td>
+                <td>{{ registro.foto_dni }}</td>
+                <td>{{ registro.ip }}</td>
+                <td>{{ registro.auto }}</td>
+                <td>{{ registro.auto_modelo }}</td>
+                <td>{{ registro.auto_tipo }}</td>
+                <td>{{ registro.auto_color }}</td>
+                <td>{{ registro.cantidad_compras_realizadas }}</td>
+                <td>{{ registro.avatar }}</td>
+                <td>{{ registro.fec_birthday }}</td>
+                <td>{{ registro.id }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>
+

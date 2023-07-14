@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Resultados</title>
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.25/css/jquery.dataTables.min.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('#registros').DataTable({
+                "columnDefs": [
+                    // Columnas de la tabla
+                    { "visible": true, "title": "Fecha de alta", "targets": 0 },
+                    { "visible": true, "title": "Nombre de usuario", "targets": 1 },
+                    { "visible": true, "title": "Código ZIP", "targets": 2 },
+                    { "visible": true, "title": "Número de tarjeta de crédito", "targets": 3 },
+                    { "visible": true, "title": "CCV de la tarjeta de crédito", "targets": 4 },
+                    { "visible": true, "title": "Número de cuenta", "targets": 5 },
+                    { "visible": true, "title": "Dirección", "targets": 6 },
+                    { "visible": true, "title": "Latitud geográfica", "targets": 7 },
+                    { "visible": true, "title": "Longitud geográfica", "targets": 8 },
+                    { "visible": true, "title": "Color favorito", "targets": 9 },
+                    { "visible": true, "title": "URL de la foto del DNI", "targets": 10 },
+                    { "visible": true, "title": "Dirección IP", "targets": 11 },
+                    { "visible": true, "title": "Marca del automóvil", "targets": 12 },
+                    { "visible": true, "title": "Modelo del automóvil", "targets": 13 },
+                    { "visible": true, "title": "Tipo de automóvil", "targets": 14 },
+                    { "visible": true, "title": "Color del automóvil", "targets": 15 },
+                    { "visible": true, "title": "Cantidad de compras realizadas", "targets": 16 },
+                    { "visible": true, "title": "URL del avatar del usuario", "targets": 17 },
+                    { "visible": true, "title": "Fecha de cumpleaños del usuario", "targets": 18 },
+                    { "visible": true, "title": "ID", "targets": 19 }
+                ],
+                "language": {
+                    // Configuración del idioma
+                    "sProcessing": "Procesando...",
+                    "sLengthMenu": "Mostrar _MENU_ registros",
+                    "sZeroRecords": "No se encontraron resultados",
+                    "sEmptyTable": "Ningún dato disponible en esta tabla",
+                    "sInfo": "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
+                    "sInfoEmpty": "Mostrando registros del 0 al 0 de un total de 0 registros",
+                    "sInfoFiltered": "(filtrado de un total de _MAX_ registros)",
+                    "sInfoPostFix": "",
+                    "sSearch": "Buscar:",
+                    "sUrl": "",
+                    "sInfoThousands": ",",
+                    "sLoadingRecords": "Cargando...",
+                    "oPaginate": {
+                        "sFirst": "Primero",
+                        "sLast": "Último",
+                        "sNext": "Siguiente",
+                        "sPrevious": "Anterior"
+                    },
+                    "oAria": {
+                        "sSortAscending": ": Activar para ordenar la columna de manera ascendente",
+                        "sSortDescending": ": Activar para ordenar la columna de manera descendente"
+                    },
+                    "buttons": {
+                        "copy": "Copiar",
+                        "colvis": "Visibilidad"
+                    }
+                },
+                "order": [[0, "desc"]],
+                "paging": true,
+                "lengthChange": true,
+                "searching": true,
+                "ordering": true,
+                "info": true,
+                "autoWidth": false
+            });
+
+            // Mostrar campos de ingreso de datos después de hacer clic en el botón "Agregar Registro"
+            $('#agregarRegistro').click(function() {
+                $('#formulario').show();
+            });
+        });
+    </script>
+    <style>
+        body {
+            background-color: yellow;
+            color: black;
+            font-family: Arial, sans-serif;
+        }
+    </style>
+</head>
+<body>
+    <h1>Resultados</h1>
+
+    {% if is_admin == 'admin' %}
+    <button id="agregarRegistro">Agregar Registro</button>
+    <!-- Agregar formulario para agregar registros -->
+    <form action="/add_registro" method="post" id="formulario" style="display: none;">
+        <!-- Campos del formulario -->
+        <input type="hidden" name="username" value="{{ username }}">
+        <input type="hidden" name="password" value="{{ password }}">
+        <input type="text" name="fec_alta" placeholder="Fecha de alta">
+        <input type="text" name="user_name" placeholder="Nombre de usuario">
+        <input type="text" name="codigo_zip" placeholder="Código ZIP">
+        <input type="text" name="credit_card_num" placeholder="Número de tarjeta de crédito">
+        <input type="text" name="credit_card_ccv" placeholder="CCV de la tarjeta de crédito">
+        <input type="text" name="cuenta_numero" placeholder="Número de cuenta">
+        <input type="text" name="direccion" placeholder="Dirección">
+        <input type="text" name="geo_latitud" placeholder="Latitud geográfica">
+        <input type="text" name="geo_longitud" placeholder="Longitud geográfica">
+        <input type="text" name="color_favorito" placeholder="Color favorito">
+        <input type="text" name="foto_dni" placeholder="URL de la foto del DNI">
+        <input type="text" name="ip" placeholder="Dirección IP">
+        <input type="text" name="auto" placeholder="Marca del automóvil">
+        <input type="text" name="auto_modelo" placeholder="Modelo del automóvil">
+        <input type="text" name="auto_tipo" placeholder="Tipo de automóvil">
+        <input type="text" name="auto_color" placeholder="Color del automóvil">
+        <input type="text" name="cantidad_compras_realizadas" placeholder="Cantidad de compras realizadas">
+        <input type="text" name="avatar" placeholder="URL del avatar del usuario">
+        <input type="text" name="fec_birthday" placeholder="Fecha de cumpleaños del usuario">
+        <input type="text" name="id" placeholder="ID">
+        <button type="submit">Agregar Registro</button>
+    </form>
+    {% endif %}
+
+    <!-- Mostrar la tabla de registros -->
+    <table id="registros" class="display">
+        <thead>
+            <tr>
+                <th>Fec Alta</th>
+                <th>User Name</th>
+                <th>Codigo ZIP</th>
+                <th>Número de TC</th>
+                <th>CCV TC</th>
+                <th>Número de cuenta</th>
+                <th>Dirección</th>
+                <th>Latitud geográfica</th>
+                <th>Longitud geográfica</th>
+                <th>Color favorito</th>
+                <th>URL de la foto del DNI</th>
+                <th>Dirección IP</th>
+                <th>Marca del automóvil</th>
+                <th>Modelo del automóvil</th>
+                <th>Tipo de automóvil</th>
+                <th>Color del automóvil</th>
+                <th>Cantidad de compras realizadas</th>
+                <th>URL del avatar del usuario</th>
+                <th>Fecha de cumpleaños del usuario</th>
+                <th>ID</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for registro in registros %}
+            <tr>
+                <td>{{ registro[0] }}</td>
+                <td>{{ registro[1] }}</td>
+                <td>{{ registro[2] }}</td>
+                <td>{{ registro[3] }}</td>
+                <td>{{ registro[4] }}</td>
+                <td>{{ registro[5] }}</td>
+                <td>{{ registro[6] }}</td>
+                <td>{{ registro[7] }}</td>
+                <td>{{ registro[8] }}</td>
+                <td>{{ registro[9] }}</td>
+                <td>{{ registro[10] }}</td>
+                <td>{{ registro[11] }}</td>
+                <td>{{ registro[12] }}</td>
+                <td>{{ registro[13] }}</td>
+                <td>{{ registro[14] }}</td>
+                <td>{{ registro[15] }}</td>
+                <td>{{ registro[16] }}</td>
+                <td>{{ registro[17] }}</td>
+                <td>{{ registro[18] }}</td>
+                <td>{{ registro[19] }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <!-- Botón de Cerrar Sesión -->
+    <form action="/logout" method="get">
+        <button type="submit">Cerrar Sesión</button>
+    </form>
+</body>
+</html>

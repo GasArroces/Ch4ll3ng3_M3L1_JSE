@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Iniciar sesión</title>
+    <style>
+        body {
+            background-color: #FFE600;
+            font-family: "Helvetica Neue", Arial, sans-serif;
+            text-align: center;
+            padding-top: 100px;
+        }
+
+        h1 {
+            color: #333;
+            font-size: 28px;
+            margin-bottom: 20px;
+        }
+
+        .container {
+            width: 300px;
+            margin: 0 auto;
+            background-color: #FFF;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 5px;
+            color: #333;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #CCC;
+            border-radius: 4px;
+        }
+
+        .error-message {
+            color: red;
+            margin-bottom: 10px;
+        }
+
+        .submit-button {
+            background-color: #3483FA;
+            color: #FFF;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        .submit-button:hover {
+            background-color: #0F5AC0;
+        }
+    </style>
+</head>
+<body>
+    <h1>Iniciar sesión</h1>
+    <div class="container">
+        {% if error %}
+        <p class="error-message">{{ error }}</p>
+        {% endif %}
+<form method="POST" action="/login">
+    <div class="form-group">
+        <label for="username">Usuario</label>
+        <input type="text" id="username" name="username" required>
+    </div>
+    <div class="form-group">
+        <label for="password">Contraseña</label>
+        <input type="password" id="password" name="password" required>
+    </div>
+    <div class="form-group">
+        <button type="submit" class="submit-button">Iniciar sesión</button>
+    </div>
+</form>
+
+    </div>
+</body>
+</html>
+
